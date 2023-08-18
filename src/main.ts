@@ -7,11 +7,10 @@ const loadingValueEl = document.getElementById(
   "loading-value"
 ) as HTMLDivElement;
 
-const blurAmmount = 50;
-const image = new Image();
+const blurAmount = "var(--blur-amount)";
 
+const image = new Image();
 image.src = "https://rebrand.ly/w9lao8s";
-imgContainerEl.style.filter = `blur(${blurAmmount})px`;
 
 image.onload = function () {
   let percentage = 0;
@@ -21,9 +20,7 @@ image.onload = function () {
     callback() {
       percentage += 1;
       loadingValueEl.textContent = `${percentage}%`;
-      imgContainerEl.style.filter = `blur(${
-        blurAmmount - (blurAmmount * percentage) / 100
-      }px)`;
+      image.style.filter = `blur(calc(${blurAmount} - (${blurAmount} * ${percentage}) / 100))`;
     },
     onStart() {
       image.classList.add("img");
@@ -36,6 +33,6 @@ image.onload = function () {
 };
 
 image.onerror = function () {
-  loadingValueEl.style.color = "#333";
+  loadingValueEl.style.color = "var(--black)";
   loadingValueEl.textContent = "An error occurred while loading the image.";
 };

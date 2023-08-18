@@ -11,7 +11,7 @@ const blurAmmount = 50;
 const image = new Image();
 
 image.src = "https://rebrand.ly/w9lao8s";
-image.style.filter = `blur(${blurAmmount})px`;
+imgContainerEl.style.filter = `blur(${blurAmmount})px`;
 
 image.onload = function () {
   let percentage = 0;
@@ -21,7 +21,7 @@ image.onload = function () {
     callback() {
       percentage += 1;
       loadingValueEl.textContent = `${percentage}%`;
-      image.style.filter = `blur(${
+      imgContainerEl.style.filter = `blur(${
         blurAmmount - (blurAmmount * percentage) / 100
       }px)`;
     },
